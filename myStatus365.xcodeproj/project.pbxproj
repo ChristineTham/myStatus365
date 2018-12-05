@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7B583D9CE6E8A29D7D84B9DA /* libPods-myStatus365.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BE5DEEEF5322F82A2EE4D6B /* libPods-myStatus365.a */; };
 		87D9927921B7772400FAC981 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D9927821B7772400FAC981 /* AppDelegate.swift */; };
 		87D9927B21B7772400FAC981 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D9927A21B7772400FAC981 /* FirstViewController.swift */; };
 		87D9927D21B7772400FAC981 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D9927C21B7772400FAC981 /* SecondViewController.swift */; };
@@ -15,6 +14,10 @@
 		87D9928221B7772600FAC981 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87D9928121B7772600FAC981 /* Assets.xcassets */; };
 		87D9928521B7772600FAC981 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87D9928321B7772600FAC981 /* LaunchScreen.storyboard */; };
 		87D9929021B7772600FAC981 /* myStatus365Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D9928F21B7772600FAC981 /* myStatus365Tests.swift */; };
+		87D9929B21B7792F00FAC981 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D9929A21B7792F00FAC981 /* Authentication.swift */; };
+		87D9929D21B7796500FAC981 /* MSGraphController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D9929C21B7796500FAC981 /* MSGraphController.swift */; };
+		87D992A121B77E3900FAC981 /* myStatus365-Bridging-Header.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D992A021B77E3900FAC981 /* myStatus365-Bridging-Header.m */; };
+		D40BF799265E8998256C7925 /* libPods-myStatus365.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30DEA3D3C480D152E17F573D /* libPods-myStatus365.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,8 +31,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		30DEA3D3C480D152E17F573D /* libPods-myStatus365.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-myStatus365.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		473A5559912A0942FB6BA296 /* Pods-myStatus365.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myStatus365.debug.xcconfig"; path = "Pods/Target Support Files/Pods-myStatus365/Pods-myStatus365.debug.xcconfig"; sourceTree = "<group>"; };
-		4BE5DEEEF5322F82A2EE4D6B /* libPods-myStatus365.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-myStatus365.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		87D9927521B7772400FAC981 /* myStatus365.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myStatus365.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87D9927821B7772400FAC981 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		87D9927A21B7772400FAC981 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -41,6 +44,10 @@
 		87D9928B21B7772600FAC981 /* myStatus365Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = myStatus365Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		87D9928F21B7772600FAC981 /* myStatus365Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myStatus365Tests.swift; sourceTree = "<group>"; };
 		87D9929121B7772600FAC981 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		87D9929A21B7792F00FAC981 /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
+		87D9929C21B7796500FAC981 /* MSGraphController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGraphController.swift; sourceTree = "<group>"; };
+		87D9929F21B77E3800FAC981 /* myStatus365-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "myStatus365-Bridging-Header.h"; sourceTree = "<group>"; };
+		87D992A021B77E3900FAC981 /* myStatus365-Bridging-Header.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "myStatus365-Bridging-Header.m"; sourceTree = "<group>"; };
 		D78CC4DE0DE7002FB5519536 /* Pods-myStatus365.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myStatus365.release.xcconfig"; path = "Pods/Target Support Files/Pods-myStatus365/Pods-myStatus365.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -49,7 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B583D9CE6E8A29D7D84B9DA /* libPods-myStatus365.a in Frameworks */,
+				D40BF799265E8998256C7925 /* libPods-myStatus365.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,7 +73,7 @@
 		1FD73DD1551F184C90D63266 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4BE5DEEEF5322F82A2EE4D6B /* libPods-myStatus365.a */,
+				30DEA3D3C480D152E17F573D /* libPods-myStatus365.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -74,11 +81,13 @@
 		87D9926C21B7772400FAC981 = {
 			isa = PBXGroup;
 			children = (
+				87D992A021B77E3900FAC981 /* myStatus365-Bridging-Header.m */,
 				87D9927721B7772400FAC981 /* myStatus365 */,
 				87D9928E21B7772600FAC981 /* myStatus365Tests */,
 				87D9927621B7772400FAC981 /* Products */,
 				A9678EE31F128C1A4CFBB2AC /* Pods */,
 				1FD73DD1551F184C90D63266 /* Frameworks */,
+				87D9929F21B77E3800FAC981 /* myStatus365-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,6 +106,8 @@
 				87D9927821B7772400FAC981 /* AppDelegate.swift */,
 				87D9927A21B7772400FAC981 /* FirstViewController.swift */,
 				87D9927C21B7772400FAC981 /* SecondViewController.swift */,
+				87D9929A21B7792F00FAC981 /* Authentication.swift */,
+				87D9929C21B7796500FAC981 /* MSGraphController.swift */,
 				87D9927E21B7772400FAC981 /* Main.storyboard */,
 				87D9928121B7772600FAC981 /* Assets.xcassets */,
 				87D9928321B7772600FAC981 /* LaunchScreen.storyboard */,
@@ -174,6 +185,7 @@
 				TargetAttributes = {
 					87D9927421B7772400FAC981 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 					87D9928A21B7772600FAC981 = {
 						CreatedOnToolsVersion = 10.1;
@@ -251,8 +263,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				87D9927D21B7772400FAC981 /* SecondViewController.swift in Sources */,
+				87D9929D21B7796500FAC981 /* MSGraphController.swift in Sources */,
 				87D9927921B7772400FAC981 /* AppDelegate.swift in Sources */,
+				87D992A121B77E3900FAC981 /* myStatus365-Bridging-Header.m in Sources */,
 				87D9927B21B7772400FAC981 /* FirstViewController.swift in Sources */,
+				87D9929B21B7792F00FAC981 /* Authentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,17 +430,21 @@
 			baseConfigurationReference = 473A5559912A0942FB6BA296 /* Pods-myStatus365.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8CU263VDFG;
 				INFOPLIST_FILE = myStatus365/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = au.org.nsw.transport.myStatus365;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "myStatus365-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -434,17 +453,20 @@
 			baseConfigurationReference = D78CC4DE0DE7002FB5519536 /* Pods-myStatus365.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8CU263VDFG;
 				INFOPLIST_FILE = myStatus365/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = au.org.nsw.transport.myStatus365;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "myStatus365-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
