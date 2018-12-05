@@ -8,15 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		87D9927921B7772400FAC981 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D9927821B7772400FAC981 /* AppDelegate.swift */; };
-		87D9927B21B7772400FAC981 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D9927A21B7772400FAC981 /* FirstViewController.swift */; };
-		87D9927D21B7772400FAC981 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D9927C21B7772400FAC981 /* SecondViewController.swift */; };
+		87D9927B21B7772400FAC981 /* myStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D9927A21B7772400FAC981 /* myStatusViewController.swift */; };
 		87D9928021B7772400FAC981 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87D9927E21B7772400FAC981 /* Main.storyboard */; };
 		87D9928221B7772600FAC981 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87D9928121B7772600FAC981 /* Assets.xcassets */; };
 		87D9928521B7772600FAC981 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87D9928321B7772600FAC981 /* LaunchScreen.storyboard */; };
 		87D9929021B7772600FAC981 /* myStatus365Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D9928F21B7772600FAC981 /* myStatus365Tests.swift */; };
 		87D9929B21B7792F00FAC981 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D9929A21B7792F00FAC981 /* Authentication.swift */; };
 		87D9929D21B7796500FAC981 /* MSGraphController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D9929C21B7796500FAC981 /* MSGraphController.swift */; };
-		87D992A121B77E3900FAC981 /* myStatus365-Bridging-Header.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D992A021B77E3900FAC981 /* myStatus365-Bridging-Header.m */; };
+		87D992A321B78BCB00FAC981 /* myTeamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D992A221B78BCB00FAC981 /* myTeamTableViewController.swift */; };
 		D40BF799265E8998256C7925 /* libPods-myStatus365.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30DEA3D3C480D152E17F573D /* libPods-myStatus365.a */; };
 /* End PBXBuildFile section */
 
@@ -35,8 +34,7 @@
 		473A5559912A0942FB6BA296 /* Pods-myStatus365.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myStatus365.debug.xcconfig"; path = "Pods/Target Support Files/Pods-myStatus365/Pods-myStatus365.debug.xcconfig"; sourceTree = "<group>"; };
 		87D9927521B7772400FAC981 /* myStatus365.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myStatus365.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87D9927821B7772400FAC981 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		87D9927A21B7772400FAC981 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		87D9927C21B7772400FAC981 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		87D9927A21B7772400FAC981 /* myStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myStatusViewController.swift; sourceTree = "<group>"; };
 		87D9927F21B7772400FAC981 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		87D9928121B7772600FAC981 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		87D9928421B7772600FAC981 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,7 +45,7 @@
 		87D9929A21B7792F00FAC981 /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		87D9929C21B7796500FAC981 /* MSGraphController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGraphController.swift; sourceTree = "<group>"; };
 		87D9929F21B77E3800FAC981 /* myStatus365-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "myStatus365-Bridging-Header.h"; sourceTree = "<group>"; };
-		87D992A021B77E3900FAC981 /* myStatus365-Bridging-Header.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "myStatus365-Bridging-Header.m"; sourceTree = "<group>"; };
+		87D992A221B78BCB00FAC981 /* myTeamTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myTeamTableViewController.swift; sourceTree = "<group>"; };
 		D78CC4DE0DE7002FB5519536 /* Pods-myStatus365.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myStatus365.release.xcconfig"; path = "Pods/Target Support Files/Pods-myStatus365/Pods-myStatus365.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,7 +79,6 @@
 		87D9926C21B7772400FAC981 = {
 			isa = PBXGroup;
 			children = (
-				87D992A021B77E3900FAC981 /* myStatus365-Bridging-Header.m */,
 				87D9927721B7772400FAC981 /* myStatus365 */,
 				87D9928E21B7772600FAC981 /* myStatus365Tests */,
 				87D9927621B7772400FAC981 /* Products */,
@@ -104,8 +101,8 @@
 			isa = PBXGroup;
 			children = (
 				87D9927821B7772400FAC981 /* AppDelegate.swift */,
-				87D9927A21B7772400FAC981 /* FirstViewController.swift */,
-				87D9927C21B7772400FAC981 /* SecondViewController.swift */,
+				87D9927A21B7772400FAC981 /* myStatusViewController.swift */,
+				87D992A221B78BCB00FAC981 /* myTeamTableViewController.swift */,
 				87D9929A21B7792F00FAC981 /* Authentication.swift */,
 				87D9929C21B7796500FAC981 /* MSGraphController.swift */,
 				87D9927E21B7772400FAC981 /* Main.storyboard */,
@@ -262,11 +259,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87D9927D21B7772400FAC981 /* SecondViewController.swift in Sources */,
 				87D9929D21B7796500FAC981 /* MSGraphController.swift in Sources */,
 				87D9927921B7772400FAC981 /* AppDelegate.swift in Sources */,
-				87D992A121B77E3900FAC981 /* myStatus365-Bridging-Header.m in Sources */,
-				87D9927B21B7772400FAC981 /* FirstViewController.swift in Sources */,
+				87D9927B21B7772400FAC981 /* myStatusViewController.swift in Sources */,
+				87D992A321B78BCB00FAC981 /* myTeamTableViewController.swift in Sources */,
 				87D9929B21B7792F00FAC981 /* Authentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
