@@ -11,6 +11,7 @@ import Foundation
 class MSGraphController {
     static let clientId = "e810233c-a57b-4300-8c12-633a14c4dc26"
     static let scopes   = ["User.Read.All", "Mail.Read", "Calendars.Read", "Contacts.Read", "Directory.AccessAsUser.All", "People.Read", "Group.Read.All"]
+    static var shared: MSGraphController?
     lazy var graphClient: MSGraphClient = {
         
         let client = MSGraphClient.defaultClient()
@@ -21,6 +22,8 @@ class MSGraphController {
     var allUsers : [MSGraphUser]
     var myGroups : [MSGraphDirectoryObject]
     var myEvents : [MSGraphEvent]
+    var myManager : MSGraphDirectoryObject?
+    var myReports : [MSGraphDirectoryObject]
 
     init (with authentication: Authentication) {
         MSGraphClient.setAuthenticationProvider(authentication.authenticationProvider)
@@ -29,6 +32,7 @@ class MSGraphController {
         allUsers = []
         myGroups = []
         myEvents = []
+        myReports = []
     }
     
     // Returns select information about the signed-in user from Azure Active Directory. Applies to personal or work accounts
@@ -92,6 +96,7 @@ class MSGraphController {
                 completion(.Failure(error: MSGraphError.ErrorType(error: error)))
             }
             else {
+                self.myReports = []
                 var displayString = "List of directs: \n"
                 if let directs = directCollection {
                     
@@ -101,6 +106,7 @@ class MSGraphController {
                             return
                         }
                         displayString += "\(name)\n"
+                        self.myReports.append(direct)
                     }
                 }
                 
@@ -126,6 +132,7 @@ class MSGraphController {
                 var displayString: String = "Manager information: \n"
                 
                 if let manager = directoryObject {
+                    self.myManager = manager
                     if let managerName = manager.dictionaryFromItem()["displayName"] {
                         displayString += "Manager is \(managerName)\n\n"
                     }
@@ -352,3 +359,5 @@ enum MSGraphError: Error {
     case ErrorType(error: Error)
     case UnexpectecError(errorString: String)
 }
+
+var sharedGraphController : MSGraphController?

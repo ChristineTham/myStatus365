@@ -18,29 +18,101 @@ class myTeamTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        sharedGraphController?.getManager(with: { (result) in
+            switch result
+            {
+            case .Success(let displayText):
+                print(displayText!)
+                DispatchQueue.main.async(execute: {
+                    self.tableView.reloadData()
+                })
+            default:
+                print("Error")
+            }
+        })
+        sharedGraphController?.getDirects(with: { (result) in
+            switch result
+            {
+            case .Success(let displayText):
+                print(displayText!)
+                DispatchQueue.main.async(execute: {
+                    self.tableView.reloadData()
+                })
+            default:
+                print("Error")
+            }
+        })
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        switch section {
+        case 0:
+            if (sharedGraphController?.myManager == nil) {
+                return 0
+            }
+            else {
+                return 1
+            }
+        case 1:
+            return (sharedGraphController?.myReports.count)!
+        default:
+            return 0
+    }
     }
 
-    /*
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "my Manager"
+        case 1:
+            return "my Team"
+        default:
+            return ""
+        }
+        
+    }
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "personCell", for: indexPath)
 
         // Configure the cell...
+        switch indexPath.section {
+        case 0:
+            if (sharedGraphController?.myManager == nil) {
+                cell.textLabel?.text = "n/a"
+                cell.detailTextLabel?.text = ""
+                return cell
+            }
+            
+            if let displayName = sharedGraphController?.myManager!.dictionaryFromItem()!["displayName"]! as? String {
+                cell.textLabel?.text = displayName
+            }
+            
+            if let mail = sharedGraphController?.myManager!.dictionaryFromItem()!["mail"]! as? String {
+                cell.detailTextLabel?.text = mail
+            }
+        case 1:
+            let person = sharedGraphController?.myReports[indexPath.row]
+            if let displayName = person!.dictionaryFromItem()!["displayName"]! as? String {
+                cell.textLabel?.text = displayName
+            }
+            if let mail = person!.dictionaryFromItem()!["mail"]! as? String {
+                cell.textLabel?.text = mail
+            }
+        default:
+            cell.textLabel?.text = "n/a"
+            cell.detailTextLabel?.text = ""
+        }
+
 
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.

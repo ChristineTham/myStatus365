@@ -47,6 +47,7 @@ class myStatusViewController: UIViewController {
                 }
                 else {
                     self.graph = MSGraphController(with: self.authentication)
+                    sharedGraphController = self.graph
                     self.graph?.getMe(with: { (result) in
                         switch (result) {
                         case .Success:
