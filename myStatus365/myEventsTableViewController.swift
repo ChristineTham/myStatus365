@@ -1,14 +1,14 @@
 //
-//  myTeamTableViewController.swift
+//  myEventsTableViewController.swift
 //  myStatus365
 //
-//  Created by Chris Tham on 5/12/18.
+//  Created by Chris Tham on 6/12/18.
 //  Copyright © 2018 Transport for NSW. All rights reserved.
 //
 
 import UIKit
 
-class myTeamTableViewController: UITableViewController {
+class myEventsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,19 +18,7 @@ class myTeamTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        sharedGraphController?.getManager(with: { (result) in
-            switch result
-            {
-            case .Success(let displayText):
-                print(displayText!)
-                DispatchQueue.main.async(execute: {
-                    self.tableView.reloadData()
-                })
-            default:
-                print("Error")
-            }
-        })
-        sharedGraphController?.getDirects(with: { (result) in
+        sharedGraphController?.getEvents(with: { (result) in
             switch result
             {
             case .Success(let displayText):
@@ -47,67 +35,49 @@ class myTeamTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            if (sharedGraphController?.myManager == nil) {
-                return 0
-            }
-            else {
-                return 1
-            }
-        case 1:
-            return (sharedGraphController?.myReports.count)!
-        default:
-            return 0
-    }
+        return (sharedGraphController?.myEvents.count)!
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "my Manager"
+            return "my Calendar"
         case 1:
-            return "my Team"
+            return "my Leave"
         default:
             return ""
         }
         
     }
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "personCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath)
+        let df = DateFormatter()
+        df.dateStyle = .short
+        df.timeStyle = .short
+        let isodf = ISO8601DateFormatter()
+        isodf.formatOptions = .withInternetDateTime
 
         // Configure the cell...
-        switch indexPath.section {
-        case 0:
-            if (sharedGraphController?.myManager == nil) {
-                cell.textLabel?.text = "n/a"
-                return cell
-            }
-            
-            if let displayName = sharedGraphController?.myManager!.dictionaryFromItem()!["displayName"]! as? String {
-                cell.textLabel?.text = displayName
-            }
-        case 1:
-            let person = sharedGraphController?.myReports[indexPath.row]
-            if let displayName = person!.dictionaryFromItem()!["displayName"]! as? String {
-                cell.textLabel?.text = displayName
-            }
-        default:
-            cell.textLabel?.text = "n/a"
-            cell.detailTextLabel?.text = ""
+        let event = sharedGraphController?.myEvents[indexPath.row]
+        if let subject = event?.subject {
+            cell.textLabel?.text = subject
         }
-        
-        let status = StatusType.random()
-        cell.detailTextLabel?.backgroundColor = status.getBackgroundColor()
-        cell.detailTextLabel?.textColor = status.getForegroundColor()
-        cell.detailTextLabel?.text = status.getLabel()
-        cell.imageView?.image = status.getImage()
+        if let location = event?.location.displayName {
+            cell.detailTextLabel?.text = location
+        }
+        if let start = event?.start.dateTime {
+            if let date = isodf.date(from: start) {
+                cell.detailTextLabel?.text = (cell.detailTextLabel?.text ?? "no location") + " (\(df.string(from: date)))"
+            }
+            else {
+                cell.detailTextLabel?.text = (cell.detailTextLabel?.text ?? "no location") + " (\(start))"
 
+            }
+        }
 
         return cell
     }
