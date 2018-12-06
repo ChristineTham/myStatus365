@@ -112,7 +112,7 @@ enum StatusType : Int, CaseIterable {
     }
     
     static func random() -> StatusType {
-        let random = Int(arc4random_uniform(UInt32(StatusType.allCases.count)))
+        let random = Int(arc4random_uniform(UInt32(StatusType.allCases.count - 1)))
         return StatusType(rawValue: random)!
     }
 }

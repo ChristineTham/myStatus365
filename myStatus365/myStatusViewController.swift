@@ -19,6 +19,9 @@ class myStatusViewController: UIViewController {
     @IBOutlet weak var connectButton: UIBarButtonItem!
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var statusImageView: UIImageView!
+    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
     
     //MARK: - Controller overrides
     
@@ -82,6 +85,16 @@ class myStatusViewController: UIViewController {
     func updateUserInfo(_ user: MSGraphUser) {
         DispatchQueue.main.async(execute: {
             self.nameLabel.text = user.displayName
+            let status = StatusType.random()
+            self.statusImageView.image = status.getImage()
+            self.statusLabel.text = status.getLabel()
+            self.statusLabel.textColor = status.getForegroundColor()
+            self.statusLabel.backgroundColor = status.getBackgroundColor()
+            self.locationLabel.text = user.officeLocation
+            if let address = user.streetAddress {
+                self.locationLabel.text = self.locationLabel.text! + "\n" + address
+                self.locationLabel.text = self.locationLabel.text! + "\n" + user.city! + " " + user.state! + " " + user.postalCode!
+            }
         })
     }
 }
