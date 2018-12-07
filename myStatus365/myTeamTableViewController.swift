@@ -14,10 +14,11 @@ class myTeamTableViewController: UITableViewController {
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
         sharedGraphController?.getManager(with: { (result) in
             switch result
             {
@@ -63,7 +64,7 @@ class myTeamTableViewController: UITableViewController {
             return (sharedGraphController?.myReports.count)!
         default:
             return 0
-    }
+        }
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -75,7 +76,6 @@ class myTeamTableViewController: UITableViewController {
         default:
             return ""
         }
-        
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -108,7 +108,6 @@ class myTeamTableViewController: UITableViewController {
         cell.detailTextLabel?.text = status.getLabel()
         cell.imageView?.image = status.getImage()
 
-
         return cell
     }
 
@@ -132,29 +131,45 @@ class myTeamTableViewController: UITableViewController {
     }
     */
 
-    /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+        let movedPerson = sharedGraphController?.myReports.remove(at: fromIndexPath.row)
+        sharedGraphController?.myReports.insert(movedPerson!, at: to.row)
+        tableView.reloadData()
     }
-    */
 
-    /*
     // Override to support conditional rearranging of the table view.
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the item to be re-orderable.
         return true
     }
-    */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        super.prepare(for: segue, sender: sender)
+        guard let destination = segue.destination as? personStatusViewController else {
+            fatalError("Unexpected destination: \(segue.destination)")
+        }
+        
+        guard let selectedPersonCell = sender as? UITableViewCell else {
+            fatalError("Unexpected sender: \(String(describing: sender))")
+        }
+        
+        guard let indexPath = tableView.indexPath(for: selectedPersonCell) else {
+            fatalError("The selected cell is not being displayed by the table")
+        }
+        
+        switch indexPath.section {
+        case 0:
+            destination.person = sharedGraphController?.myManager
+        case 1:
+            destination.person = sharedGraphController?.myReports[indexPath.row]
+        default:
+            fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
+        }
     }
-    */
-
 }

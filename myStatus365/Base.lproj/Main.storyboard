@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Cxc-Fs-Lt0">
-                                <rect key="frame" x="0.0" y="64" width="375" height="140.5"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="525.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="27G-zo-aJc">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -57,12 +57,18 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Location Unknown" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="liV-CW-XyV">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Location: Unknown" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="liV-CW-XyV">
                                         <rect key="frame" x="0.0" y="120" width="375" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="generic location" translatesAutoresizingMaskIntoConstraints="NO" id="5kX-Th-kF0">
+                                        <rect key="frame" x="0.0" y="150.5" width="375" height="375"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="5kX-Th-kF0" secondAttribute="height" multiplier="1:1" id="51s-du-H37"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -75,14 +81,20 @@
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
                     <navigationItem key="navigationItem" title="my Status" largeTitleDisplayMode="always" id="5MY-GS-CjV">
-                        <barButtonItem key="rightBarButtonItem" title="Connect" id="yND-r2-o0N">
+                        <barButtonItem key="leftBarButtonItem" title="Connect" id="yND-r2-o0N">
                             <connections>
                                 <action selector="connectButtonPressed:" destination="9pv-A4-QxB" id="FHX-Gw-acQ"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Update" id="gHG-Pa-i7x">
+                            <connections>
+                                <segue destination="Mmu-9w-oOX" kind="show" id="6qW-Xm-Gp6"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="connectButton" destination="yND-r2-o0N" id="ncv-rT-gFX"/>
+                        <outlet property="locationImageView" destination="5kX-Th-kF0" id="XAN-RX-5TA"/>
                         <outlet property="locationLabel" destination="liV-CW-XyV" id="su7-5e-Jtp"/>
                         <outlet property="nameLabel" destination="Pfa-gN-sK1" id="gBP-Kl-UQY"/>
                         <outlet property="photoImageView" destination="lE7-7j-hSZ" id="Pl4-Y4-S1N"/>
@@ -93,6 +105,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1688.8" y="-320.68965517241384"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="zQj-5s-wcl">
+            <objects>
+                <viewController id="Mmu-9w-oOX" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0U1-Zs-13f">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="gVN-1F-IVA"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y47-D5-y23" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2451" y="-323"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -111,7 +138,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="0.0" y="0.0"/>
+            <point key="canvasLocation" x="-78" y="354"/>
         </scene>
         <!--my Team-->
         <scene sceneID="Aed-be-7T6">
@@ -122,29 +149,36 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="personCell" textLabel="845-AD-k9W" detailTextLabel="HXC-Lw-oMT" style="IBUITableViewCellStyleSubtitle" id="858-R2-cVZ">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="personCell" textLabel="845-AD-k9W" detailTextLabel="HXC-Lw-oMT" imageView="1IJ-zM-pSS" style="IBUITableViewCellStyleSubtitle" id="858-R2-cVZ">
                                 <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="858-R2-cVZ" id="xBX-1l-OzX">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="845-AD-k9W">
-                                            <rect key="frame" x="16" y="5" width="33.5" height="20.5"/>
+                                            <rect key="frame" x="75" y="5" width="33.5" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HXC-Lw-oMT">
-                                            <rect key="frame" x="16" y="25.5" width="44" height="14.5"/>
+                                            <rect key="frame" x="75" y="25.5" width="44" height="14.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="AtDesk" id="1IJ-zM-pSS">
+                                            <rect key="frame" x="16" y="0.0" width="44" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="nkq-NY-O1x" kind="presentation" id="Fig-w0-Ovb"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -157,6 +191,140 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Csr-lB-SdQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1702" y="354"/>
+        </scene>
+        <!--User Name-->
+        <scene sceneID="rDS-fj-ncz">
+            <objects>
+                <viewController id="P8g-pj-Jb8" customClass="personStatusViewController" customModule="myStatus365" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="x5l-a7-t6C">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="p53-Ev-mPh">
+                                <rect key="frame" x="0.0" y="64" width="375" height="525.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="RTh-HX-4vg">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Other" translatesAutoresizingMaskIntoConstraints="NO" id="SiP-0P-JPS">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="SiP-0P-JPS" secondAttribute="height" multiplier="1:1" id="5wr-wF-M3L"/>
+                                                    <constraint firstAttribute="height" constant="50" id="LXE-b3-uZf"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status Unknown" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VKZ-9h-P7U">
+                                                <rect key="frame" x="60" y="0.0" width="315" height="50"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Location: Unknown" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sjM-Eu-7mg">
+                                        <rect key="frame" x="0.0" y="60" width="375" height="20.5"/>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="spe-kg-o8D">
+                                        <rect key="frame" x="0.0" y="90.5" width="375" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WnW-At-1DB">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="0XP-WH-GdZ"/>
+                                                    <constraint firstAttribute="width" secondItem="WnW-At-1DB" secondAttribute="height" multiplier="1:1" id="ZP7-Sh-5jS"/>
+                                                </constraints>
+                                                <state key="normal" image="phone"/>
+                                                <connections>
+                                                    <action selector="phoneButtonPressed:" destination="P8g-pj-Jb8" eventType="touchUpInside" id="h19-or-dri"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5xG-ur-sAT">
+                                                <rect key="frame" x="81.5" y="0.0" width="50" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="KVC-YT-IJK"/>
+                                                    <constraint firstAttribute="width" secondItem="5xG-ur-sAT" secondAttribute="height" multiplier="1:1" id="ve3-5f-HJe"/>
+                                                </constraints>
+                                                <state key="normal" image="message"/>
+                                                <connections>
+                                                    <action selector="messageButtonPressed:" destination="P8g-pj-Jb8" eventType="touchUpInside" id="Qcz-Bg-l40"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SkF-aa-8Yd">
+                                                <rect key="frame" x="162.5" y="0.0" width="50" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="D79-SI-KaL"/>
+                                                    <constraint firstAttribute="width" secondItem="SkF-aa-8Yd" secondAttribute="height" multiplier="1:1" id="ECA-B6-bYZ"/>
+                                                </constraints>
+                                                <state key="normal" image="mail"/>
+                                                <connections>
+                                                    <action selector="mailButtonPressed:" destination="P8g-pj-Jb8" eventType="touchUpInside" id="eLS-Od-v9D"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WyB-L4-eXX">
+                                                <rect key="frame" x="244" y="0.0" width="50" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="WyB-L4-eXX" secondAttribute="height" multiplier="1:1" id="EK2-dD-Zqw"/>
+                                                    <constraint firstAttribute="height" constant="50" id="JqJ-Xb-8es"/>
+                                                </constraints>
+                                                <state key="normal" image="skypecall"/>
+                                                <connections>
+                                                    <action selector="skypeCallButtonPressed:" destination="P8g-pj-Jb8" eventType="touchUpInside" id="Bjw-XU-J7k"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gim-mR-ARz">
+                                                <rect key="frame" x="325" y="0.0" width="50" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="0Oc-wH-isN"/>
+                                                    <constraint firstAttribute="width" secondItem="gim-mR-ARz" secondAttribute="height" multiplier="1:1" id="3bE-xh-FLp"/>
+                                                </constraints>
+                                                <state key="normal" image="skypechat"/>
+                                                <connections>
+                                                    <action selector="skypeChatButtonPressed:" destination="P8g-pj-Jb8" eventType="touchUpInside" id="Nh2-t9-M7p"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="5xG-ur-sAT" firstAttribute="width" secondItem="5xG-ur-sAT" secondAttribute="height" multiplier="1:1" id="1Uq-CB-dgC"/>
+                                            <constraint firstItem="gim-mR-ARz" firstAttribute="width" secondItem="gim-mR-ARz" secondAttribute="height" multiplier="1:1" id="52k-VH-g4R"/>
+                                            <constraint firstItem="WyB-L4-eXX" firstAttribute="width" secondItem="WyB-L4-eXX" secondAttribute="height" multiplier="1:1" id="5y1-wi-Kst"/>
+                                            <constraint firstItem="SkF-aa-8Yd" firstAttribute="width" secondItem="SkF-aa-8Yd" secondAttribute="height" multiplier="1:1" id="jdM-fu-Xf5"/>
+                                        </constraints>
+                                    </stackView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="generic location" translatesAutoresizingMaskIntoConstraints="NO" id="GVy-gC-vxg">
+                                        <rect key="frame" x="0.0" y="150.5" width="375" height="375"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="GVy-gC-vxg" secondAttribute="height" multiplier="1:1" id="8OA-Tg-AlQ"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="p53-Ev-mPh" firstAttribute="leading" secondItem="Bwz-VR-Z6Q" secondAttribute="leading" id="d9s-Yu-Elb"/>
+                            <constraint firstItem="Bwz-VR-Z6Q" firstAttribute="trailing" secondItem="p53-Ev-mPh" secondAttribute="trailing" id="pch-6N-8Yz"/>
+                            <constraint firstItem="p53-Ev-mPh" firstAttribute="top" secondItem="Bwz-VR-Z6Q" secondAttribute="top" id="vQX-sH-ms0"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Bwz-VR-Z6Q"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="User Name" largeTitleDisplayMode="never" id="N0J-ko-W92"/>
+                    <connections>
+                        <outlet property="locationLabel" destination="sjM-Eu-7mg" id="nf6-aO-RKV"/>
+                        <outlet property="mailButton" destination="SkF-aa-8Yd" id="0uZ-cH-Og0"/>
+                        <outlet property="messageButton" destination="5xG-ur-sAT" id="KNh-qi-l0N"/>
+                        <outlet property="phoneButton" destination="WnW-At-1DB" id="Trc-UF-pvx"/>
+                        <outlet property="skypeCallButton" destination="WyB-L4-eXX" id="88j-bV-QKp"/>
+                        <outlet property="skypeChatButton" destination="gim-mR-ARz" id="wc9-NZ-ytU"/>
+                        <outlet property="statusImageView" destination="SiP-0P-JPS" id="RgK-Lz-bOH"/>
+                        <outlet property="statusLabel" destination="VKZ-9h-P7U" id="pgH-7D-f4W"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KzX-mw-BcW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3394.4000000000001" y="353.9730134932534"/>
         </scene>
         <!--my Events-->
         <scene sceneID="YPI-VV-hUS">
@@ -188,7 +356,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="AtDesk" id="Nbf-HN-ccl">
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="Meeting" id="Nbf-HN-ccl">
                                             <rect key="frame" x="16" y="0.0" width="44" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </imageView>
@@ -201,7 +369,9 @@
                             <outlet property="delegate" destination="FPT-Fk-aMr" id="nkA-JM-cl7"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="my Events" largeTitleDisplayMode="never" id="Aic-lN-rVN"/>
+                    <navigationItem key="navigationItem" title="my Events" largeTitleDisplayMode="never" id="Aic-lN-rVN">
+                        <barButtonItem key="rightBarButtonItem" title="Request Leave" id="dHP-tA-DJF"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UlL-LC-jxo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -260,16 +430,41 @@
             </objects>
             <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241384"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="LgD-yu-cHz">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nkq-NY-O1x" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="irM-gP-dhc">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="P8g-pj-Jb8" kind="relationship" relationship="rootViewController" id="l9f-GA-qLv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uiB-mB-Fek" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2455.1999999999998" y="353.9730134932534"/>
+        </scene>
     </scenes>
     <resources>
         <image name="AtDesk" width="96" height="96"/>
+        <image name="Meeting" width="100" height="100"/>
         <image name="Other" width="96" height="96"/>
+        <image name="generic location" width="1152" height="1152"/>
         <image name="generic user" width="96" height="96"/>
+        <image name="mail" width="100" height="100"/>
+        <image name="message" width="100" height="100"/>
         <image name="myEvents" width="50" height="50"/>
         <image name="myEvents_filled" width="50" height="50"/>
         <image name="myStatus" width="50" height="50"/>
         <image name="myStatus_filled" width="50" height="50"/>
         <image name="myTeam" width="50" height="50"/>
         <image name="myTeam_filled" width="50" height="50"/>
+        <image name="phone" width="100" height="100"/>
+        <image name="skypecall" width="96" height="96"/>
+        <image name="skypechat" width="96" height="96"/>
     </resources>
 </document>

@@ -22,6 +22,7 @@ class myStatusViewController: UIViewController {
     @IBOutlet weak var statusImageView: UIImageView!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var locationImageView: UIImageView!
     
     //MARK: - Controller overrides
     
@@ -82,20 +83,32 @@ class myStatusViewController: UIViewController {
         
     }
     
+    @IBAction func unwindToMyStatus(sender: UIStoryboardSegue) {
+        updateLocation()
+    }
+    
     func updateUserInfo(_ user: MSGraphUser) {
         DispatchQueue.main.async(execute: {
             self.nameLabel.text = user.displayName
-            let status = StatusType.random()
-            self.statusImageView.image = status.getImage()
-            self.statusLabel.text = status.getLabel()
-            self.statusLabel.textColor = status.getForegroundColor()
-            self.statusLabel.backgroundColor = status.getBackgroundColor()
-            self.locationLabel.text = user.officeLocation
-            if let address = user.streetAddress {
-                self.locationLabel.text = self.locationLabel.text! + "\n" + address
-                self.locationLabel.text = self.locationLabel.text! + "\n" + user.city! + " " + user.state! + " " + user.postalCode!
-            }
+            let status = sharedGraphController?.myStatus
+            self.statusImageView.image = status!.getImage()
+            self.statusLabel.text = status!.getLabel()
+            self.statusLabel.textColor = status!.getForegroundColor()
+            self.statusLabel.backgroundColor = status!.getBackgroundColor()
+            self.locationLabel.text = sharedGraphController?.currLocation
+            self.locationImageView.image = #imageLiteral(resourceName: "L25Pitt")
         })
+    }
+    
+    func updateLocation() {
+        let status = StatusType.AtDesk
+        sharedGraphController?.myStatus = status
+        self.statusImageView.image = status.getImage()
+        self.statusLabel.text = status.getLabel()
+        self.statusLabel.textColor = status.getForegroundColor()
+        self.statusLabel.backgroundColor = status.getBackgroundColor()
+        self.locationLabel.text = sharedGraphController?.currLocation
+        self.locationImageView.image = #imageLiteral(resourceName: "ABW25Pitt")
     }
 }
 

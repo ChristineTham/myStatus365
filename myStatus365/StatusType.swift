@@ -112,7 +112,16 @@ enum StatusType : Int, CaseIterable {
     }
     
     static func random() -> StatusType {
+        // Random status rawvalue except omit last (.Other)
         let random = Int(arc4random_uniform(UInt32(StatusType.allCases.count - 1)))
         return StatusType(rawValue: random)!
     }
+}
+
+struct CurrentStatus {
+    var user : String
+    var status : StatusType
+    var start, end : Date
+    var location : String
+    var description : String
 }

@@ -35,21 +35,26 @@ class myEventsTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (sharedGraphController?.myEvents.count)!
+        switch section {
+        case 0:
+            return 1
+        default:
+            return (sharedGraphController?.myEvents.count)!
+        }
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "my Calendar"
-        case 1:
             return "my Leave"
+        case 1:
+            return "my Calendar"
         default:
-            return ""
+            return "unknown section"
         }
         
     }
@@ -62,21 +67,31 @@ class myEventsTableViewController: UITableViewController {
         isodf.formatOptions = .withInternetDateTime
 
         // Configure the cell...
-        let event = sharedGraphController?.myEvents[indexPath.row]
-        if let subject = event?.subject {
-            cell.textLabel?.text = subject
-        }
-        if let location = event?.location.displayName {
-            cell.detailTextLabel?.text = location
-        }
-        if let start = event?.start.dateTime {
-            if let date = isodf.date(from: start) {
-                cell.detailTextLabel?.text = (cell.detailTextLabel?.text ?? "no location") + " (\(df.string(from: date)))"
+        switch indexPath.section {
+        case 0:
+            cell.imageView?.image = #imageLiteral(resourceName: "Leave")
+            cell.textLabel?.text = "Christmas closedown"
+            cell.detailTextLabel?.text = "24/12/2018-4/1/2019"
+        case 1:
+            cell.imageView?.image = #imageLiteral(resourceName: "Meeting")
+            let event = sharedGraphController?.myEvents[indexPath.row]
+            if let subject = event?.subject {
+                cell.textLabel?.text = subject
             }
-            else {
-                cell.detailTextLabel?.text = (cell.detailTextLabel?.text ?? "no location") + " (\(start))"
+            if let location = event?.location.displayName {
+                cell.detailTextLabel?.text = location
+            }
+            if let start = event?.start.dateTime {
+                if let date = isodf.date(from: start) {
+                    cell.detailTextLabel?.text = (cell.detailTextLabel?.text ?? "no location") + " (\(df.string(from: date)))"
+                }
+                else {
+                    cell.detailTextLabel?.text = (cell.detailTextLabel?.text ?? "no location") + " (\(start))"
 
+                }
             }
+        default:
+            print("Unknown section")
         }
 
         return cell

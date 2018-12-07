@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		871BA3EF21B9F00500B24F9A /* addQRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871BA3EE21B9F00500B24F9A /* addQRCodeViewController.swift */; };
+		871BA3F121BA1CCF00B24F9A /* personStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871BA3F021BA1CCF00B24F9A /* personStatusViewController.swift */; };
 		8727A96021B8A4DB00302566 /* myEventsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8727A95F21B8A4DB00302566 /* myEventsTableViewController.swift */; };
 		8727A96221B8C30A00302566 /* StatusType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8727A96121B8C30A00302566 /* StatusType.swift */; };
 		87D9927921B7772400FAC981 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D9927821B7772400FAC981 /* AppDelegate.swift */; };
@@ -34,6 +36,8 @@
 /* Begin PBXFileReference section */
 		30DEA3D3C480D152E17F573D /* libPods-myStatus365.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-myStatus365.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		473A5559912A0942FB6BA296 /* Pods-myStatus365.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myStatus365.debug.xcconfig"; path = "Pods/Target Support Files/Pods-myStatus365/Pods-myStatus365.debug.xcconfig"; sourceTree = "<group>"; };
+		871BA3EE21B9F00500B24F9A /* addQRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addQRCodeViewController.swift; sourceTree = "<group>"; };
+		871BA3F021BA1CCF00B24F9A /* personStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = personStatusViewController.swift; sourceTree = "<group>"; };
 		8727A95F21B8A4DB00302566 /* myEventsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myEventsTableViewController.swift; sourceTree = "<group>"; };
 		8727A96121B8C30A00302566 /* StatusType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusType.swift; sourceTree = "<group>"; };
 		87D9927521B7772400FAC981 /* myStatus365.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myStatus365.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,7 +110,9 @@
 			children = (
 				87D9927821B7772400FAC981 /* AppDelegate.swift */,
 				87D9927A21B7772400FAC981 /* myStatusViewController.swift */,
+				871BA3EE21B9F00500B24F9A /* addQRCodeViewController.swift */,
 				87D992A221B78BCB00FAC981 /* myTeamTableViewController.swift */,
+				871BA3F021BA1CCF00B24F9A /* personStatusViewController.swift */,
 				8727A95F21B8A4DB00302566 /* myEventsTableViewController.swift */,
 				87D9929A21B7792F00FAC981 /* Authentication.swift */,
 				87D9929C21B7796500FAC981 /* MSGraphController.swift */,
@@ -269,8 +275,10 @@
 				87D9929D21B7796500FAC981 /* MSGraphController.swift in Sources */,
 				87D9927921B7772400FAC981 /* AppDelegate.swift in Sources */,
 				87D9927B21B7772400FAC981 /* myStatusViewController.swift in Sources */,
+				871BA3F121BA1CCF00B24F9A /* personStatusViewController.swift in Sources */,
 				8727A96221B8C30A00302566 /* StatusType.swift in Sources */,
 				87D992A321B78BCB00FAC981 /* myTeamTableViewController.swift in Sources */,
+				871BA3EF21B9F00500B24F9A /* addQRCodeViewController.swift in Sources */,
 				87D9929B21B7792F00FAC981 /* Authentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

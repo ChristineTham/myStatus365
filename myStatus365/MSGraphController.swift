@@ -18,21 +18,25 @@ class MSGraphController {
         return client!
     }()
     var me : MSGraphUser?
+    var myStatus : StatusType
     var myImage : UIImage?
     var allUsers : [MSGraphUser]
     var myGroups : [MSGraphDirectoryObject]
     var myEvents : [MSGraphEvent]
     var myManager : MSGraphDirectoryObject?
     var myReports : [MSGraphDirectoryObject]
+    var currLocation : String
 
     init (with authentication: Authentication) {
         MSGraphClient.setAuthenticationProvider(authentication.authenticationProvider)
         me = nil
+        myStatus = .AtDesk
         myImage = nil
         allUsers = []
         myGroups = []
         myEvents = []
         myReports = []
+        currLocation = "Current Location:\nLevel 25 477 Pitt Street\nHaymarket NSW 2008"
     }
     
     // Returns select information about the signed-in user from Azure Active Directory. Applies to personal or work accounts
