@@ -11,6 +11,7 @@
 		871BA3F121BA1CCF00B24F9A /* personStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871BA3F021BA1CCF00B24F9A /* personStatusViewController.swift */; };
 		8727A96021B8A4DB00302566 /* myEventsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8727A95F21B8A4DB00302566 /* myEventsTableViewController.swift */; };
 		8727A96221B8C30A00302566 /* StatusType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8727A96121B8C30A00302566 /* StatusType.swift */; };
+		878473C221BE0D58000D5AFA /* SAPLeaveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878473C121BE0D58000D5AFA /* SAPLeaveController.swift */; };
 		87D9927921B7772400FAC981 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D9927821B7772400FAC981 /* AppDelegate.swift */; };
 		87D9927B21B7772400FAC981 /* myStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D9927A21B7772400FAC981 /* myStatusViewController.swift */; };
 		87D9928021B7772400FAC981 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87D9927E21B7772400FAC981 /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 		871BA3F021BA1CCF00B24F9A /* personStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = personStatusViewController.swift; sourceTree = "<group>"; };
 		8727A95F21B8A4DB00302566 /* myEventsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myEventsTableViewController.swift; sourceTree = "<group>"; };
 		8727A96121B8C30A00302566 /* StatusType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusType.swift; sourceTree = "<group>"; };
+		878473C121BE0D58000D5AFA /* SAPLeaveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAPLeaveController.swift; sourceTree = "<group>"; };
 		87D9927521B7772400FAC981 /* myStatus365.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myStatus365.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87D9927821B7772400FAC981 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		87D9927A21B7772400FAC981 /* myStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myStatusViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				87D9928321B7772600FAC981 /* LaunchScreen.storyboard */,
 				87D9928621B7772600FAC981 /* Info.plist */,
 				8727A96121B8C30A00302566 /* StatusType.swift */,
+				878473C121BE0D58000D5AFA /* SAPLeaveController.swift */,
 			);
 			path = myStatus365;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				8727A96221B8C30A00302566 /* StatusType.swift in Sources */,
 				87D992A321B78BCB00FAC981 /* myTeamTableViewController.swift in Sources */,
 				871BA3EF21B9F00500B24F9A /* addQRCodeViewController.swift in Sources */,
+				878473C221BE0D58000D5AFA /* SAPLeaveController.swift in Sources */,
 				87D9929B21B7792F00FAC981 /* Authentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
