@@ -18,6 +18,9 @@ class personStatusViewController: UIViewController, MFMessageComposeViewControll
     
     //MARK: - Outlets
     
+    @IBOutlet weak var jobTitleLabel: UILabel!
+    @IBOutlet weak var mobileLabel: UILabel!
+    @IBOutlet weak var mailLabel: UILabel!
     @IBOutlet weak var statusImageView: UIImageView!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
@@ -31,6 +34,31 @@ class personStatusViewController: UIViewController, MFMessageComposeViewControll
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        if let displayName = person!.dictionaryFromItem()!["displayName"]! as? String {
+            self.title = displayName
+        }
+        
+        if let jobTitle = person!.dictionaryFromItem()!["jobTitle"]! as? String {
+            jobTitleLabel.text = "Position: \(jobTitle)"
+        }
+        else {
+            jobTitleLabel.text = "Position: n/a"
+        }
+        
+        if let mobilePhone = person!.dictionaryFromItem()!["mobilePhone"]! as? String {
+            mobileLabel.text = "mobile: \(mobilePhone)"
+        }
+        else {
+            mobileLabel.text = "mobile: n/a"
+        }
+        
+        if let email = person!.dictionaryFromItem()!["mail"]! as? String {
+            mailLabel.text = "email: \(email)"
+        }
+        else {
+            mailLabel.text = "email: n/a"
+        }
+        
         status = StatusType.random()
         statusImageView.image = status?.getImage()
         statusLabel.text = status?.getLabel()

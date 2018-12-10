@@ -107,8 +107,14 @@ class myStatusViewController: UIViewController {
         self.statusLabel.text = status.getLabel()
         self.statusLabel.textColor = status.getForegroundColor()
         self.statusLabel.backgroundColor = status.getBackgroundColor()
-        self.locationLabel.text = sharedGraphController?.currLocation
-        self.locationImageView.image = #imageLiteral(resourceName: "ABW25Pitt")
+        
+        let location = sharedGraphController?.currLocation
+        self.locationLabel.text = location
+        if location!.contains("Pitt") {
+            self.locationImageView.image = #imageLiteral(resourceName: "ABW25Pitt")
+        } else if location!.contains("Macquarie") {
+            self.locationImageView.image = #imageLiteral(resourceName: "ABWMacq")
+        }
     }
 }
 
