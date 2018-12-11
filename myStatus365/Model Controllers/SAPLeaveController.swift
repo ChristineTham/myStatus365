@@ -57,9 +57,8 @@ extension Date {
 
 class SAPLeaveController {
     let baseURL = URL(string: "https://tfnswpoc.apimanagement.ap1.hana.ondemand.com:443/ZPOC_ESS_LEAVE_SRV")!
-    let leaveRequestListset = "/ETY_LEAVE_REQUESTLISTSET"
-    let leaveCreateGet = "/ETS_LEAVE_CREATESET('ESSTEST14')"
-    let leaveCreate = "/ETS_LEAVE_CREATESET"
+    let leaveRequestListset = "/LEAVE_REQUESTLIST"
+    let leaveCreate = "/LEAVE_CREATE"
     let userName = "POCUSER1"
     let password = "Welcome@123"
     
@@ -72,16 +71,15 @@ class SAPLeaveController {
         let url = baseURL.appendingPathComponent(leaveRequestListset)
         var components = URLComponents(url: url, resolvingAgainstBaseURL: true)!
         components.queryItems = [
-            URLQueryItem(name: "$filter", value: "Status eq '\(user)'"),
             URLQueryItem(name: "sap-client", value: "110")
         ]
         let myURL = components.url!
-//        let myURL = URL(string: "https://tfnswpoc.apimanagement.ap1.hana.ondemand.com:443/ZPOC_ESS_LEAVE_SRV/ETY_LEAVE_REQUESTLISTSET?$filter=Status%20eq%20'ESSTEST14'&sap-client=110")!
         
         var request = URLRequest(url: myURL)
         request.httpMethod = "GET"
         request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("Fetch", forHTTPHeaderField: "X-CSRF-Token")
         
         //making the request
         let task = URLSession.shared.dataTask(with: request, completionHandler: completionHandler)
@@ -107,7 +105,8 @@ class SAPLeaveController {
         request.httpMethod = "GET"
         request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
-        
+        request.addValue("Fetch", forHTTPHeaderField: "X-CSRF-Token")
+
         //making the request
         let task = URLSession.shared.dataTask(with: request, completionHandler: completionHandler)
         task.resume()
