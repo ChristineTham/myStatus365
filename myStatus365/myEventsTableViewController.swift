@@ -9,8 +9,12 @@
 import UIKit
 
 class myEventsTableViewController: UITableViewController {
+    let sapLeave = SAPLeaveController()
+    let user = "ESSTEST14"
+    var leaveRequestList : LeaveRequestList?
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
@@ -30,6 +34,26 @@ class myEventsTableViewController: UITableViewController {
                 print("Error")
             }
         })
+        
+        let _ = sapLeave.getLeaveEntitlements(user) { data, response, error in
+            guard let data = data, error == nil else {
+                print("\(error!)")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse {
+                // check status code returned by the http server
+                print("status code = \(httpStatus.statusCode)")
+                // process result
+                if (httpStatus.statusCode == 200) {
+                    let jsonDecoder = JSONDecoder()
+                    self.leaveRequestList = try? jsonDecoder.decode(LeaveRequestList.self, from: data)
+                    DispatchQueue.main.async(execute: {
+                        self.tableView.reloadData()
+                    })
+                }
+            }
+        }
     }
 
     // MARK: - Table view data source
@@ -41,7 +65,12 @@ class myEventsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 1
+            if leaveRequestList == nil {
+                return 0
+            }
+            else {
+                return (leaveRequestList?.d.results.count)!
+            }
         default:
             return (sharedGraphController?.myEvents.count)!
         }
@@ -50,7 +79,7 @@ class myEventsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "my Leave"
+            return "my Leave Requests"
         case 1:
             return "my Calendar"
         default:
@@ -61,17 +90,21 @@ class myEventsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath)
         let df = DateFormatter()
-        df.dateStyle = .short
-        df.timeStyle = .short
         let isodf = ISO8601DateFormatter()
         isodf.formatOptions = .withInternetDateTime
 
         // Configure the cell...
         switch indexPath.section {
         case 0:
+            let leaveRequest = leaveRequestList?.d.results[indexPath.row]
+            df.dateStyle = .short
+            df.timeStyle = .none
             cell.imageView?.image = #imageLiteral(resourceName: "Leave")
-            cell.textLabel?.text = "Christmas closedown"
-            cell.detailTextLabel?.text = "24/12/2018-4/1/2019"
+            cell.textLabel?.text = leaveRequest?.SubtypeDescription
+            if let beginDate = Date(jsonDate: (leaveRequest?.Begda)!),
+                let endDate = Date(jsonDate: (leaveRequest?.Endda)!) {
+                cell.detailTextLabel?.text = (leaveRequest?.StatusText)! + " (" + df.string(from: beginDate) + "-" + df.string(from: endDate) + ")"
+            }
         case 1:
             cell.imageView?.image = #imageLiteral(resourceName: "Meeting")
             let event = sharedGraphController?.myEvents[indexPath.row]
