@@ -10,7 +10,7 @@ import UIKit
 
 class myEventsTableViewController: UITableViewController {
     let sapLeave = SAPLeaveController()
-    let user = "ESSTEST14"
+    let sapuser = "ESSTEST14"
     var leaveRequests = [LeaveRequest]()
 
     override func viewDidLoad() {
@@ -54,8 +54,9 @@ class myEventsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath)
         let df = DateFormatter()
+        df.locale = Locale(identifier: "en_AU")
         let isodf = ISO8601DateFormatter()
-        isodf.formatOptions = .withInternetDateTime
+        isodf.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
 
         // Configure the cell...
         switch indexPath.section {
@@ -70,6 +71,9 @@ class myEventsTableViewController: UITableViewController {
                 cell.detailTextLabel?.text = leaveRequest.StatusText + " (" + df.string(from: beginDate) + "-" + df.string(from: endDate) + ")"
             }
         case 1:
+            df.dateStyle = .short
+            df.timeStyle = .short
+//            df.timeZone = TimeZone(identifier: "Australia/Sydney")
             cell.imageView?.image = #imageLiteral(resourceName: "Meeting")
             let event = sharedGraphController?.myEvents[indexPath.row]
             if let subject = event?.subject {
@@ -78,14 +82,20 @@ class myEventsTableViewController: UITableViewController {
             if let location = event?.location.displayName {
                 cell.detailTextLabel?.text = location
             }
-            if let start = event?.start.dateTime {
-                if let date = isodf.date(from: start) {
-                    cell.detailTextLabel?.text = (cell.detailTextLabel?.text ?? "no location") + " (\(df.string(from: date)))"
-                }
-                else {
-                    cell.detailTextLabel?.text = (cell.detailTextLabel?.text ?? "no location") + " (\(start))"
-
-                }
+            if (event?.isAllDay)! {
+                df.timeStyle = .none
+                df.timeZone = TimeZone(identifier: "GMT")
+            }
+            if let isoStartDate = event?.start.dateTime,
+                let startTimeZone = event?.start.timeZone,
+                let isoEndDate = event?.end.dateTime,
+                let endTimeZone = event?.end.timeZone,
+                let startDate = isodf.date(from: isoStartDate + startTimeZone),
+                let endDate = isodf.date(from: isoEndDate + endTimeZone) {
+                    cell.detailTextLabel?.text = (cell.detailTextLabel?.text ?? "no location") + " (\(df.string(from: startDate))-\(df.string(from: endDate)))"
+            }
+            else {
+                cell.detailTextLabel?.text = (cell.detailTextLabel?.text ?? "no location")
             }
         default:
             print("Unknown section")
@@ -160,7 +170,7 @@ class myEventsTableViewController: UITableViewController {
             }
         })
         
-        let _ = sapLeave.getLeaveRequestList(user) { data, response, error in
+        let _ = sapLeave.getLeaveRequestList(sapuser) { data, response, error in
             guard let data = data, error == nil else {
                 print("\(error!)")
                 return
