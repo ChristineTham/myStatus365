@@ -75,10 +75,10 @@ class SAPLeaveController {
             URLQueryItem(name: "$filter", value: "Status eq '\(user)'"),
             URLQueryItem(name: "sap-client", value: "110")
         ]
-        let menuURL = components.url!
-//        let menuURL = URL(string: "https://tfnswpoc.apimanagement.ap1.hana.ondemand.com:443/ZPOC_ESS_LEAVE_SRV/ETY_LEAVE_REQUESTLISTSET?$filter=Status%20eq%20'ESSTEST14'&sap-client=110")!
+        let myURL = components.url!
+//        let myURL = URL(string: "https://tfnswpoc.apimanagement.ap1.hana.ondemand.com:443/ZPOC_ESS_LEAVE_SRV/ETY_LEAVE_REQUESTLISTSET?$filter=Status%20eq%20'ESSTEST14'&sap-client=110")!
         
-        var request = URLRequest(url: menuURL)
+        var request = URLRequest(url: myURL)
         request.httpMethod = "GET"
         request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
@@ -101,10 +101,9 @@ class SAPLeaveController {
         components.queryItems = [
             URLQueryItem(name: "sap-client", value: "110")
         ]
-        let menuURL = components.url!
-        //        let menuURL = URL(string: "https://tfnswpoc.apimanagement.ap1.hana.ondemand.com:443/ZPOC_ESS_LEAVE_SRV/ETY_LEAVE_REQUESTLISTSET?$filter=Status%20eq%20'ESSTEST14'&sap-client=110")!
+        let myURL = components.url!
         
-        var request = URLRequest(url: menuURL)
+        var request = URLRequest(url: myURL)
         request.httpMethod = "GET"
         request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
