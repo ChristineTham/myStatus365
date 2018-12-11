@@ -391,7 +391,16 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="my Events" largeTitleDisplayMode="never" id="Aic-lN-rVN">
-                        <barButtonItem key="rightBarButtonItem" title="Request Leave" id="dHP-tA-DJF"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="hHs-2T-7w7">
+                            <connections>
+                                <action selector="refreshButtonPressed:" destination="FPT-Fk-aMr" id="JGB-gI-iIB"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Request Leave" id="dHP-tA-DJF">
+                            <connections>
+                                <action selector="requestLeaveButtonPressed:" destination="FPT-Fk-aMr" id="iE9-dP-YjU"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UlL-LC-jxo" userLabel="First Responder" sceneMemberID="firstResponder"/>

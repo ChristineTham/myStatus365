@@ -11,7 +11,7 @@ import UIKit
 class myEventsTableViewController: UITableViewController {
     let sapLeave = SAPLeaveController()
     let user = "ESSTEST14"
-    var leaveRequestList : LeaveRequestList?
+    var leaveRequests = [LeaveRequest]()
 
     override func viewDidLoad() {
         
@@ -22,38 +22,7 @@ class myEventsTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        sharedGraphController?.getEvents(with: { (result) in
-            switch result
-            {
-            case .Success(let displayText):
-                print(displayText!)
-                DispatchQueue.main.async(execute: {
-                    self.tableView.reloadData()
-                })
-            default:
-                print("Error")
-            }
-        })
-        
-        let _ = sapLeave.getLeaveEntitlements(user) { data, response, error in
-            guard let data = data, error == nil else {
-                print("\(error!)")
-                return
-            }
-            
-            if let httpStatus = response as? HTTPURLResponse {
-                // check status code returned by the http server
-                print("status code = \(httpStatus.statusCode)")
-                // process result
-                if (httpStatus.statusCode == 200) {
-                    let jsonDecoder = JSONDecoder()
-                    self.leaveRequestList = try? jsonDecoder.decode(LeaveRequestList.self, from: data)
-                    DispatchQueue.main.async(execute: {
-                        self.tableView.reloadData()
-                    })
-                }
-            }
-        }
+        refreshData()
     }
 
     // MARK: - Table view data source
@@ -65,12 +34,7 @@ class myEventsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            if leaveRequestList == nil {
-                return 0
-            }
-            else {
-                return (leaveRequestList?.d.results.count)!
-            }
+            return leaveRequests.count
         default:
             return (sharedGraphController?.myEvents.count)!
         }
@@ -96,14 +60,14 @@ class myEventsTableViewController: UITableViewController {
         // Configure the cell...
         switch indexPath.section {
         case 0:
-            let leaveRequest = leaveRequestList?.d.results[indexPath.row]
+            let leaveRequest = leaveRequests[indexPath.row]
             df.dateStyle = .short
             df.timeStyle = .none
             cell.imageView?.image = #imageLiteral(resourceName: "Leave")
-            cell.textLabel?.text = leaveRequest?.SubtypeDescription
-            if let beginDate = Date(jsonDate: (leaveRequest?.Begda)!),
-                let endDate = Date(jsonDate: (leaveRequest?.Endda)!) {
-                cell.detailTextLabel?.text = (leaveRequest?.StatusText)! + " (" + df.string(from: beginDate) + "-" + df.string(from: endDate) + ")"
+            cell.textLabel?.text = leaveRequest.SubtypeDescription
+            if let beginDate = Date(jsonDate: leaveRequest.Begda),
+                let endDate = Date(jsonDate: leaveRequest.Endda) {
+                cell.detailTextLabel?.text = leaveRequest.StatusText + " (" + df.string(from: beginDate) + "-" + df.string(from: endDate) + ")"
             }
         case 1:
             cell.imageView?.image = #imageLiteral(resourceName: "Meeting")
@@ -165,7 +129,6 @@ class myEventsTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -173,6 +136,50 @@ class myEventsTableViewController: UITableViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    */
 
+    //MARK: - Actions
+    @IBAction func refreshButtonPressed(_ sender: UIBarButtonItem) {
+    }
+    
+    @IBAction func requestLeaveButtonPressed(_ sender: UIBarButtonItem) {
+        refreshData()
+    }
+    
+    //MARK - Private Functions
+    func refreshData() {
+        sharedGraphController?.getEvents(with: { (result) in
+            switch result
+            {
+            case .Success(let displayText):
+                print(displayText!)
+                DispatchQueue.main.async(execute: {
+                    self.tableView.reloadData()
+                })
+            default:
+                print("Error")
+            }
+        })
+        
+        let _ = sapLeave.getLeaveRequestList(user) { data, response, error in
+            guard let data = data, error == nil else {
+                print("\(error!)")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse {
+                // check status code returned by the http server
+                print("status code = \(httpStatus.statusCode)")
+                // process result
+                if (httpStatus.statusCode == 200) {
+                    let jsonDecoder = JSONDecoder()
+                    if let leaveRequestList = try? jsonDecoder.decode(LeaveRequestList.self, from: data) {
+                        self.leaveRequests = leaveRequestList.d.results
+                    }
+                    DispatchQueue.main.async(execute: {
+                        self.tableView.reloadData()
+                    })
+                }
+            }
+        }
+    }
 }
