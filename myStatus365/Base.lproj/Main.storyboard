@@ -106,10 +106,10 @@
             </objects>
             <point key="canvasLocation" x="1688.8" y="-320.68965517241384"/>
         </scene>
-        <!--View Controller-->
+        <!--AddQR Code View Controller-->
         <scene sceneID="zQj-5s-wcl">
             <objects>
-                <viewController id="Mmu-9w-oOX" sceneMemberID="viewController">
+                <viewController id="Mmu-9w-oOX" customClass="addQRCodeViewController" customModule="myStatus365" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0U1-Zs-13f">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
