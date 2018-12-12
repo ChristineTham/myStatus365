@@ -146,6 +146,10 @@ class myEventsTableViewController: UITableViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
+    
+    @IBAction func unwindToMyEvents(segue: UIStoryboardSegue) {
+        
+    }
 
     //MARK: - Actions
     @IBAction func refreshButtonPressed(_ sender: UIBarButtonItem) {
