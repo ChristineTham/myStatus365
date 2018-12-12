@@ -8,11 +8,39 @@
 
 import Foundation
 
-struct LeaveRequestList : Codable {
-    var d : Results
+struct LeaveCreateRecord : Codable {
+    var d : LeaveCreate
 }
 
-struct Results : Codable {
+struct LeaveCreate : Codable {
+    var __metadata : MetaData
+    var USERID : String
+    var SUBTY: String
+    var BEGDA : String
+    var ENDDA : String
+    var MSG: String
+    var MANAGER : String
+}
+
+struct LeaveTypeList : Codable {
+    var d : LeaveTypeResults
+}
+
+struct LeaveTypeResults : Codable {
+    var results : [LeaveType]
+}
+
+struct LeaveType : Codable {
+    var __metadata : MetaData
+    var Subty: String
+    var Subtytext: String
+}
+
+struct LeaveRequestList : Codable {
+    var d : LeaveResults
+}
+
+struct LeaveResults : Codable {
     var results : [LeaveRequest]
 }
 
@@ -55,14 +83,15 @@ extension Date {
     }
 }
 
-class SAPLeaveController {
+class SAPController {
     let baseURL = URL(string: "https://tfnswpoc.apimanagement.ap1.hana.ondemand.com:443/ZPOC_ESS_LEAVE_SRV")!
     let leaveRequestListset = "/LEAVE_REQUESTLIST"
+    let leaveTypeList = "/LEAVE_TYPES"
     let leaveCreate = "/LEAVE_CREATE"
     let userName = "POCUSER1"
     let password = "Welcome@123"
     
-    func getLeaveRequestList(_ user : String, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+    func getLeaveRequestList(_ user : String, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {
         let loginString = String(format: "%@:%@", userName, password)
         let loginData = loginString.data(using: String.Encoding.utf8)!
         let base64LoginString = loginData.base64EncodedString()
@@ -84,11 +113,32 @@ class SAPLeaveController {
         //making the request
         let task = URLSession.shared.dataTask(with: request, completionHandler: completionHandler)
         task.resume()
-        
-        return task
     }
     
-    func prepopulateLeaveRequest(_ user : String, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+    func getLeaveTypeList(completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {
+        let loginString = String(format: "%@:%@", userName, password)
+        let loginData = loginString.data(using: String.Encoding.utf8)!
+        let base64LoginString = loginData.base64EncodedString()
+        
+        // create the request
+        let url = baseURL.appendingPathComponent(leaveTypeList)
+        var components = URLComponents(url: url, resolvingAgainstBaseURL: true)!
+        components.queryItems = [
+            URLQueryItem(name: "sap-client", value: "110")
+        ]
+        let myURL = components.url!
+        
+        var request = URLRequest(url: myURL)
+        request.httpMethod = "GET"
+        request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        //making the request
+        let task = URLSession.shared.dataTask(with: request, completionHandler: completionHandler)
+        task.resume()
+    }
+    
+    func prepopulateLeaveRequest(_ user : String, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {
         let loginString = String(format: "%@:%@", userName, password)
         let loginData = loginString.data(using: String.Encoding.utf8)!
         let base64LoginString = loginData.base64EncodedString()
@@ -110,7 +160,35 @@ class SAPLeaveController {
         //making the request
         let task = URLSession.shared.dataTask(with: request, completionHandler: completionHandler)
         task.resume()
+    }
+    
+    func createLeaveRequest(with leaveRequest : LeaveCreateRecord, CSRFToken : String, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {
+        let loginString = String(format: "%@:%@", userName, password)
+        let loginData = loginString.data(using: String.Encoding.utf8)!
+        let base64LoginString = loginData.base64EncodedString()
         
-        return task
+        // create the request
+        let url = baseURL.appendingPathComponent(leaveCreate)
+        var components = URLComponents(url: url, resolvingAgainstBaseURL: true)!
+        components.queryItems = [
+            URLQueryItem(name: "sap-client", value: "110")
+        ]
+        let myURL = components.url!
+        
+        var request = URLRequest(url: myURL)
+        request.httpMethod = "POST"
+        request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue(CSRFToken, forHTTPHeaderField: "X-CSRF-Token")
+        let jsonEncoder = JSONEncoder()
+        jsonEncoder.outputFormatting = .prettyPrinted
+        if let jsonData = try? jsonEncoder.encode(leaveRequest) {
+            request.httpBody = jsonData
+            print(String(data: jsonData, encoding: .utf8))
+        }
+        
+        //making the request
+        let task = URLSession.shared.dataTask(with: request, completionHandler: completionHandler)
+        task.resume()
     }
 }

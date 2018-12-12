@@ -9,7 +9,7 @@
 import UIKit
 
 class myEventsTableViewController: UITableViewController {
-    let sapLeave = SAPLeaveController()
+    let sap = SAPController()
     let sapuser = "ESSTEST14"
     var leaveRequests = [LeaveRequest]()
 
@@ -145,10 +145,39 @@ class myEventsTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if segue.identifier! == "newLeaveRequest" {
+            let navigationController = segue.destination as! UINavigationController
+            let newLeaveRequestController = navigationController.viewControllers[0] as! newLeaveRequestTableViewController
+            newLeaveRequestController.sap = sap
+            newLeaveRequestController.sapuser = sapuser
+        }
     }
     
     @IBAction func unwindToMyEvents(segue: UIStoryboardSegue) {
-        
+        if (segue.identifier == "saveLeave") {
+            let newLeaveRequestController = segue.source as! newLeaveRequestTableViewController
+//            let navigationController = segue.source as! UINavigationController
+//            let newLeaveRequestController = navigationController.viewControllers[0] as! newLeaveRequestTableViewController
+            
+            sap.createLeaveRequest(with: newLeaveRequestController.leaveCreate!, CSRFToken: newLeaveRequestController.CSRFToken!) { data, response, error in
+                guard let data = data, error == nil else {
+                    print("\(error!)")
+                    return
+                }
+                
+                if let httpStatus = response as? HTTPURLResponse {
+                    // check status code returned by the http server
+                    print("status code = \(httpStatus.statusCode)")
+                    // process result
+                    if (httpStatus.statusCode == 200) {
+                        print("leave created")
+                        print(data as NSData)
+                    }
+                }
+            }
+        }
+
+        refreshData()
     }
 
     //MARK: - Actions
@@ -174,7 +203,7 @@ class myEventsTableViewController: UITableViewController {
             }
         })
         
-        let _ = sapLeave.getLeaveRequestList(sapuser) { data, response, error in
+        sap.getLeaveRequestList(sapuser) { data, response, error in
             guard let data = data, error == nil else {
                 print("\(error!)")
                 return
