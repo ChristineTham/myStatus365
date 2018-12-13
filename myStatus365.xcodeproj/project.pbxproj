@@ -22,7 +22,7 @@
 		87D9929B21B7792F00FAC981 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D9929A21B7792F00FAC981 /* Authentication.swift */; };
 		87D9929D21B7796500FAC981 /* MSGraphController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D9929C21B7796500FAC981 /* MSGraphController.swift */; };
 		87D992A321B78BCB00FAC981 /* myTeamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D992A221B78BCB00FAC981 /* myTeamTableViewController.swift */; };
-		87E02DB321BF728F0018DDAE /* eventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E02DB221BF728F0018DDAE /* eventDetailViewController.swift */; };
+		87E02DB321BF728F0018DDAE /* eventDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E02DB221BF728F0018DDAE /* eventDetailTableViewController.swift */; };
 		D40BF799265E8998256C7925 /* libPods-myStatus365.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30DEA3D3C480D152E17F573D /* libPods-myStatus365.a */; };
 /* End PBXBuildFile section */
 
@@ -59,7 +59,7 @@
 		87D9929C21B7796500FAC981 /* MSGraphController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGraphController.swift; sourceTree = "<group>"; };
 		87D9929F21B77E3800FAC981 /* myStatus365-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "myStatus365-Bridging-Header.h"; sourceTree = "<group>"; };
 		87D992A221B78BCB00FAC981 /* myTeamTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myTeamTableViewController.swift; sourceTree = "<group>"; };
-		87E02DB221BF728F0018DDAE /* eventDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eventDetailViewController.swift; sourceTree = "<group>"; };
+		87E02DB221BF728F0018DDAE /* eventDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eventDetailTableViewController.swift; sourceTree = "<group>"; };
 		D78CC4DE0DE7002FB5519536 /* Pods-myStatus365.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myStatus365.release.xcconfig"; path = "Pods/Target Support Files/Pods-myStatus365/Pods-myStatus365.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,7 +144,7 @@
 				871BA3F021BA1CCF00B24F9A /* personStatusViewController.swift */,
 				8727A95F21B8A4DB00302566 /* myEventsTableViewController.swift */,
 				87818F8021C0DBF800045ABE /* newLeaveRequestTableViewController.swift */,
-				87E02DB221BF728F0018DDAE /* eventDetailViewController.swift */,
+				87E02DB221BF728F0018DDAE /* eventDetailTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -297,7 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8727A96021B8A4DB00302566 /* myEventsTableViewController.swift in Sources */,
-				87E02DB321BF728F0018DDAE /* eventDetailViewController.swift in Sources */,
+				87E02DB321BF728F0018DDAE /* eventDetailTableViewController.swift in Sources */,
 				87D9929D21B7796500FAC981 /* MSGraphController.swift in Sources */,
 				87D9927921B7772400FAC981 /* AppDelegate.swift in Sources */,
 				87D9927B21B7772400FAC981 /* myStatusViewController.swift in Sources */,

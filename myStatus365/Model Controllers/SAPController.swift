@@ -184,7 +184,7 @@ class SAPController {
         jsonEncoder.outputFormatting = .prettyPrinted
         if let jsonData = try? jsonEncoder.encode(leaveRequest) {
             request.httpBody = jsonData
-            print(String(data: jsonData, encoding: .utf8))
+            print(String(data: jsonData, encoding: .utf8)!)
         }
         
         //making the request

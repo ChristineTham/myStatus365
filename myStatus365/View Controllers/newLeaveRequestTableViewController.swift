@@ -147,8 +147,7 @@ class newLeaveRequestTableViewController: UITableViewController, UIPickerViewDat
         }
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt
-        indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch (indexPath) {
         case [1,0]:
             isLeaveTypePickerHidden = !isLeaveTypePickerHidden

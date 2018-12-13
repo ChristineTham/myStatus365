@@ -151,6 +151,57 @@ class myEventsTableViewController: UITableViewController {
             newLeaveRequestController.sap = sap
             newLeaveRequestController.sapuser = sapuser
         }
+        else if segue.identifier! == "eventDetail" {
+            let navigationController = segue.destination as! UINavigationController
+            let eventDetailController = navigationController.viewControllers[0] as! eventDetailTableViewController
+            
+            guard let selectedPersonCell = sender as? UITableViewCell else {
+                fatalError("Unexpected sender: \(String(describing: sender))")
+            }
+            
+            guard let indexPath = tableView.indexPath(for: selectedPersonCell) else {
+                fatalError("The selected cell is not being displayed by the table")
+            }
+            
+            switch indexPath.section {
+            case 0:
+                let leaveRequest = leaveRequests[indexPath.row]
+                eventDetailController.event = leaveRequest.SubtypeDescription
+                eventDetailController.location = "n/a"
+                eventDetailController.status = leaveRequest.StatusText
+                eventDetailController.type = leaveRequest.Subty
+                eventDetailController.start = Date(jsonDate: leaveRequest.Begda)!
+                eventDetailController.end = Date(jsonDate: leaveRequest.Endda)!
+
+            case 1:
+                let event = sharedGraphController?.myEvents[indexPath.row]
+                if let subject = event?.subject {
+                    eventDetailController.event = subject
+                }
+                if let location = event?.location.displayName {
+                    eventDetailController.location = location
+                }
+                if (event?.isAllDay)! {
+                    eventDetailController.type = "All Day Event"
+                }
+                else {
+                    eventDetailController.type = "Meeting"
+                }
+                eventDetailController.status = "n/a"
+                let isodf = ISO8601DateFormatter()
+                if let isoStartDate = event?.start.dateTime,
+                    let startTimeZone = event?.start.timeZone,
+                    let isoEndDate = event?.end.dateTime,
+                    let endTimeZone = event?.end.timeZone,
+                    let startDate = isodf.date(from: isoStartDate + startTimeZone),
+                    let endDate = isodf.date(from: isoEndDate + endTimeZone) {
+                    eventDetailController.start = startDate
+                    eventDetailController.end = endDate
+                }
+            default:
+                print("Unknown section")
+            }
+        }
     }
     
     @IBAction func unwindToMyEvents(segue: UIStoryboardSegue) {
