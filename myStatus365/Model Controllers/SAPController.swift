@@ -180,6 +180,8 @@ class SAPController {
         request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue(CSRFToken, forHTTPHeaderField: "X-CSRF-Token")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
         let jsonEncoder = JSONEncoder()
         jsonEncoder.outputFormatting = .prettyPrinted
         if let jsonData = try? jsonEncoder.encode(leaveRequest) {

@@ -210,6 +210,9 @@ class myEventsTableViewController: UITableViewController {
 //            let navigationController = segue.source as! UINavigationController
 //            let newLeaveRequestController = navigationController.viewControllers[0] as! newLeaveRequestTableViewController
             
+            let alert = UIAlertController(title: "Information", message: "New Leave Request Submitted", preferredStyle: .alert)
+            self.present(alert, animated: true, completion: nil)
+            
             sap.createLeaveRequest(with: newLeaveRequestController.leaveCreate!, CSRFToken: newLeaveRequestController.CSRFToken!) { data, response, error in
                 guard let data = data, error == nil else {
                     print("\(error!)")
@@ -220,22 +223,18 @@ class myEventsTableViewController: UITableViewController {
                     // check status code returned by the http server
                     print("status code = \(httpStatus.statusCode)")
                     // process result
-                    if (httpStatus.statusCode == 200) {
+                    if (httpStatus.statusCode == 201) {
                         print("leave created")
                         print(data as NSData)
+                        self.refreshData()
                     }
                 }
             }
         }
-
-        refreshData()
     }
 
     //MARK: - Actions
     @IBAction func refreshButtonPressed(_ sender: UIBarButtonItem) {
-    }
-    
-    @IBAction func requestLeaveButtonPressed(_ sender: UIBarButtonItem) {
         refreshData()
     }
     

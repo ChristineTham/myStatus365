@@ -401,7 +401,6 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Request Leave" id="dHP-tA-DJF">
                             <connections>
-                                <action selector="requestLeaveButtonPressed:" destination="FPT-Fk-aMr" id="iE9-dP-YjU"/>
                                 <segue destination="MQR-hY-NvC" kind="presentation" identifier="newLeaveRequest" id="CpC-wq-t4x"/>
                             </connections>
                         </barButtonItem>
